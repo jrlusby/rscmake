@@ -1,4 +1,4 @@
 #! /bin/bash
 
 mkdir -p ~/bin
-ln -s "$(realpath ./bin/rscmake)" ~/bin
+ln -sf "$(realpath ./bin/rscmake)" ~/bin
