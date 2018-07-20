@@ -26,7 +26,7 @@ cd "$DIRNAME" || exit 1
 if [ "$TARGET" == "all" ]; then
 
     {
-        flock -x 3 || exit 1
+        flock 3 || exit 1
         LAST_FILE=""
         for file in $(git ls-files --exclude-standard --others --modified | xargs realpath); do
             if [ "x$LAST_FILE" = "x" ]; then
@@ -46,7 +46,7 @@ if [ "$TARGET" == "all" ]; then
 
     {
         echo "Attmpting exclusive acquire on rscmake lock"
-        flock -x 4 || exit 1
+        flock 4 || exit 1
         echo "Acquired lock"
         scmake 2>&1 | convertToPwd
     } 4>/tmp/rscmake.lock
