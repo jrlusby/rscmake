@@ -1,14 +1,11 @@
 #! /bin/bash
 
-sc_build_root="$HOME/.scalerc"
-if [ -f "$sc_build_root" ]; then
-    # shellcheck source=/home/jlusby/.scalerc
-    . "$sc_build_root"
-else
-    exit 1
-fi
+export MBUILDLOG="/tmp/rscmake.log"
+SCALE_SCRIPTS_DIR="$(dirname "$(which scunit)")"
 
-BUILDLOG="/tmp/rscmake.log"
+# shellcheck disable=SC1090
+. "$SCALE_SCRIPTS_DIR"/scalerc
+
 TARGET="all"
 DIRNAME="$GIT_ROOT"
 
@@ -22,8 +19,6 @@ fi
 
 if [ "$TARGET" != "all" ]; then
     MBUILDLOG="/dev/null"
-else
-    MBUILDLOG=$BUILDLOG
 fi
 
 cd "$DIRNAME" || exit 1
